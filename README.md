@@ -1,6 +1,5 @@
-# TALLER 1: APLICACIONES DISTRIBUIDAS (HTTP, SOCKETS, HTML, JS,MAVEN, GIT)
-Aplicación de consulta de descripciones de películas. Esta aplicación se conecta a un API externo para obtener las descripciones de películas. 
-El usuario puede buscar una película por título y la aplicación mostrará una tabla con información sobre la película, como el género, la duración, la clasificación por edades y la sinopsis.
+# TALLER 2: TALLER DISEÑO Y ESTRUCTURACIÓN DE APLICACIONES DISTRIBUIDAS EN INTERNET
+En este taller usted explorará la arquitectura de las aplicaciones distribuidas. Concretamente, exploraremos la arquitectura de  los servidores web y el protocolo http sobre el que están soportados. 
 
 ## Iniciando
 Para descargar el repositorio y verlo local, utiliza el siguiente código:

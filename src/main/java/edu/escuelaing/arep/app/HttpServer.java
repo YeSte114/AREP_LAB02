@@ -1,5 +1,7 @@
-package edu.escuelaing.arep.app.AREP_LAB01;
+package edu.escuelaing.arep.app;
 
+import edu.escuelaing.arep.app.APIConnection;
+import edu.escuelaing.arep.app.services.PageService;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
@@ -14,6 +16,22 @@ import java.util.ArrayList;
  * @author Yeison Barreto
  */
 public class HttpServer {
+    
+    private static HttpServer instance;
+
+    /**
+     * *
+     * Encargado de crear la instancia del HttpServer
+     *
+     * @param 
+     * @return Instancia
+     */
+    public static HttpServer getInstance() {
+        if (instance == null){
+            instance = new HttpServer();
+        }
+        return instance;
+    }
 
     /**
      * *
@@ -22,7 +40,7 @@ public class HttpServer {
      * @param args
      * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void run(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(35000);
@@ -48,16 +66,27 @@ public class HttpServer {
                             clientSocket.getInputStream()));
             String inputLine, outputLine = null, title = "";
 
+            boolean first_line = true;
+            String request = "/simple";
+            
             while ((inputLine = in.readLine()) != null) {
                 if (inputLine.contains("info?title=")) {
                     String[] prov = inputLine.split("title=");
                     title = (prov[1].split("HTTP")[0].replace(" ", " "));
                 }
 
+                if (first_line) {
+                    request = inputLine.split(" ")[1];
+                    first_line = false;
+                }
+                
                 if (!in.ready()) {
                     break;
                 }
             }
+            
+            
+            
             if (!title.equals("")) {
                 String response = APIConnection.solicitTitle(title, "https://www.omdbapi.com/?t=" + title + "&apikey=f33b484c");
                 outputLine = "HTTP/1.1 200 OK\r\n"
@@ -81,6 +110,26 @@ public class HttpServer {
         serverSocket.close();
     }
 
+     /**
+     * Ejecuta un servicio indicado por el path /apps/
+     * @param serviceName El nombre del servicio o recurso a ejecutar.
+     * @return EL Header y Body del recurso solicitado, en caso de no encontrarse el recurso se le dirigirá a un 404.
+     */
+    private String executeService(String serviceName) {
+        PageService ps = PageService.getInstance();
+        try {
+            String type = serviceName.split("\\.")[1];
+            String header = ps.getHeader(type, "200 OK");
+            String body = ps.getResponse("src/main/resources/" + serviceName);
+            return header + body;
+        }
+        catch (RuntimeException e){
+            String header = ps.getHeader("html", "404 Not Found");
+            String body = ps.getResponse("src/main/resources/404.html");
+            return header + body;
+        }
+    }
+    
     /**
      * *
      * Contenido en tabla de un String

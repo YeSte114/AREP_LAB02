@@ -1,5 +1,5 @@
 
-import edu.escuelaing.arep.app.AREP_LAB01.Cache;
+import edu.escuelaing.arep.app.Cache;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

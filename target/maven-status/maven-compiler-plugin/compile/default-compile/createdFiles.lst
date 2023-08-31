@@ -1,3 +1,6 @@
-edu\escuelaing\arep\app\AREP_LAB01\APIConnection.class
-edu\escuelaing\arep\app\AREP_LAB01\Cache.class
-edu\escuelaing\arep\app\AREP_LAB01\HttpServer.class
+edu\escuelaing\arep\app\Cache.class
+edu\escuelaing\arep\app\HttpServer.class
+edu\escuelaing\arep\app\APIConnection.class
+edu\escuelaing\arep\app\App.class
+edu\escuelaing\arep\app\services\PageService.class
+edu\escuelaing\arep\app\services\RESTService.class

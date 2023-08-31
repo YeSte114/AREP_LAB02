@@ -1,4 +1,4 @@
-import edu.escuelaing.arep.app.AREP_LAB01.APIConnection;
+import edu.escuelaing.arep.app.APIConnection;
 
 import java.io.IOException;
 
