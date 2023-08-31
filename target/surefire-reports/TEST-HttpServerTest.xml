@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="HttpServerTest" time="0.879" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="HttpServerTest" time="0.958" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.1+12-LTS-39"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.1\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Yeison Barreto\OneDrive\Documentos\UNIVERSIDAD\MATERIAS CARRERA\MATERIAS ECI 2023-2\AREP\AREP_LAB02"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\Yeison Barreto\OneDrive\Documentos\UNIVERSIDAD\MATERIAS CARRERA\MATERIAS ECI 2023-2\AREP\Nueva carpeta\AREP_LAB02"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="CO"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\Yeison Barreto\OneDrive\Documentos\UNIVERSIDAD\MATERIAS CARRERA\MATERIAS ECI 2023-2\AREP\AREP_LAB02"/>
+    <property name="user.dir" value="C:\Users\Yeison Barreto\OneDrive\Documentos\UNIVERSIDAD\MATERIAS CARRERA\MATERIAS ECI 2023-2\AREP\Nueva carpeta\AREP_LAB02"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="17.0.1+12-LTS-39"/>
     <property name="os.arch" value="amd64"/>
@@ -38,13 +38,13 @@
     <property name="library.jansi.path" value="C:\Program Files\NetBeans-17\netbeans\java\maven\lib\jansi-native"/>
     <property name="user.home" value="C:\Users\Yeison Barreto"/>
     <property name="user.timezone" value="America/Bogota"/>
-    <property name="file.encoding" value="UTF-8"/>
+    <property name="file.encoding" value="Cp1252"/>
     <property name="java.specification.version" value="17"/>
     <property name="user.name" value="Yeison Barreto"/>
     <property name="java.class.path" value="C:\Program Files\NetBeans-17\netbeans\java\maven\boot\plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-17\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 --no-transfer-progress clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-17\netbeans\java\maven-nblib\netbeans-eventspy.jar --no-transfer-progress clean install"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-17.0.1"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -60,5 +60,5 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="HttpServerTest" name="testCahceConcurrent" time="0.879"/>
+  <testcase classname="HttpServerTest" name="testCahceConcurrent" time="0.958"/>
 </testsuite>

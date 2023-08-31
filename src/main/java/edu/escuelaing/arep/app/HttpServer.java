@@ -1,14 +1,14 @@
 package edu.escuelaing.arep.app;
 
-import edu.escuelaing.arep.app.APIConnection;
-import edu.escuelaing.arep.app.services.PageService;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
-import org.json.*;
+
+import edu.escuelaing.arep.app.services.PageService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ArrayList;
+import org.json.*;
 
 /**
  * Levanta servio WEB el cual corre por puerto 35000
@@ -16,18 +16,18 @@ import java.util.ArrayList;
  * @author Yeison Barreto
  */
 public class HttpServer {
-    
+
     private static HttpServer instance;
 
     /**
      * *
      * Encargado de crear la instancia del HttpServer
      *
-     * @param 
+     * @param
      * @return Instancia
      */
     public static HttpServer getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new HttpServer();
         }
         return instance;
@@ -40,7 +40,7 @@ public class HttpServer {
      * @param args
      * @throws IOException
      */
-    public static void run(String[] args) throws IOException {
+    public void run(String[] args) throws IOException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(35000);
@@ -59,36 +59,35 @@ public class HttpServer {
                 System.err.println("Accept failed.");
                 System.exit(1);
             }
-
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(
                             clientSocket.getInputStream()));
-            String inputLine, outputLine = null, title = "";
+            String inputLine, outputLine, title = "";
 
             boolean first_line = true;
             String request = "/simple";
-            
+
             while ((inputLine = in.readLine()) != null) {
                 if (inputLine.contains("info?title=")) {
                     String[] prov = inputLine.split("title=");
-                    title = (prov[1].split("HTTP")[0].replace(" ", " "));
+                    title = (prov[1].split("HTTP")[0]).replace(" ", "");
                 }
-
                 if (first_line) {
                     request = inputLine.split(" ")[1];
                     first_line = false;
                 }
-                
+
                 if (!in.ready()) {
                     break;
                 }
             }
-            
-            
-            
-            if (!title.equals("")) {
-                String response = APIConnection.solicitTitle(title, "https://www.omdbapi.com/?t=" + title + "&apikey=f33b484c");
+
+            if (request.startsWith("/apps/")) {
+                outputLine = executeService(request.substring(5));
+                //outputLine = jsonSimple();
+            } else if (!title.equals("")) {
+                String response = APIConnection.solicitTitle(title, "http://www.omdbapi.com/?t=" + title + "&apikey=7ca9f0c2");
                 outputLine = "HTTP/1.1 200 OK\r\n"
                         + "Content-Type: text/html\r\n"
                         + "\r\n"
@@ -96,12 +95,11 @@ public class HttpServer {
                         + "<table border=\" 1 \"> \n " + createTable(response)
                         + "    </table>";
             } else {
-                outputLine = "HTTP/1.1 200 OK \r\n"
-                        + "Content-Type: text/html \r\n"
+                outputLine = "HTTP/1.1 200 OK\r\n"
+                        + "Content-Type: text/html\r\n"
                         + "\r\n"
                         + index();
             }
-
             out.println(outputLine);
             out.close();
             in.close();
@@ -110,10 +108,12 @@ public class HttpServer {
         serverSocket.close();
     }
 
-     /**
+    /**
      * Ejecuta un servicio indicado por el path /apps/
+     *
      * @param serviceName El nombre del servicio o recurso a ejecutar.
-     * @return EL Header y Body del recurso solicitado, en caso de no encontrarse el recurso se le dirigir√° a un 404.
+     * @return EL Header y Body del recurso solicitado, en caso de no
+     * encontrarse el recurso se le dirigir√° a un 404.
      */
     private String executeService(String serviceName) {
         PageService ps = PageService.getInstance();
@@ -122,14 +122,13 @@ public class HttpServer {
             String header = ps.getHeader(type, "200 OK");
             String body = ps.getResponse("src/main/resources/" + serviceName);
             return header + body;
-        }
-        catch (RuntimeException e){
+        } catch (RuntimeException e) {
             String header = ps.getHeader("html", "404 Not Found");
-            String body = ps.getResponse("src/main/resources/404.html");
+            String body = ps.getResponse("src/main/resources/Error404.html");
             return header + body;
         }
     }
-    
+
     /**
      * *
      * Contenido en tabla de un String
@@ -163,10 +162,9 @@ public class HttpServer {
     }
 
     /**
-     * *
-     * Entrega index principal
+     * Entregar el index de la p·gina principal
      *
-     * @return
+     * @return index en formato de String del HTML del inicio de la P·gina
      */
     private static String index() {
         return "<!DOCTYPE html>\n"
@@ -201,5 +199,4 @@ public class HttpServer {
                 + "</body>\n"
                 + "</html>";
     }
-
 }

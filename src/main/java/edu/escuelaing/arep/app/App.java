@@ -4,7 +4,6 @@
  */
 package edu.escuelaing.arep.app;
 
-import edu.escuelaing.arep.app.HttpServer;
 import java.io.IOException;
 
 /**
